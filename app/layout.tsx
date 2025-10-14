@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
+import { Sidebar } from "@/components/layout/sidebar";
+import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import "primereact/resources/themes/lara-light-blue/theme.css";
+import "primereact/resources/primereact.min.css";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+import "primeicons/primeicons.css";
+import "primereact/resources/themes/lara-light-indigo/theme.css"; // ou outro tema
+import "primereact/resources/primereact.min.css";
+
+const poppins = Poppins({
+  weight: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
@@ -25,9 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${poppins.className} antialiased relative min-h-screen`}
       >
-        {children}
+        <div className="w-[260px] h-full fixed">
+          <Sidebar />
+        </div>
+        <PrimeReactProvider>
+          <div>{children}</div>
+        </PrimeReactProvider>
       </body>
     </html>
   );
