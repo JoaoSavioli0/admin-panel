@@ -6,6 +6,7 @@ import { FloatLabel } from "primereact/floatlabel";
 import { InputText } from "primereact/inputtext";
 import { Ripple } from "primereact/ripple";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 import * as z from "zod";
 
@@ -27,7 +28,12 @@ export default function LoginPage() {
     resolver: zodResolver(loginSchema),
   });
 
+  const router = useRouter();
+
   const onSubmit = (data: formData) => {
+    //adiciona cookie e redireciona
+    document.cookie = `communityon_admin-token=1; path=/`;
+    router.push("/dashboard");
     console.log(data);
   };
 

@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Admin Panel
 
-## Getting Started
+Este repositório contém um painel administrativo construído com Next.js (App Router). Este README descreve as tecnologias usadas e fornece um manual simples para rodar o servidor localmente em um ambiente de desenvolvimento e para gerar o build de produção.
 
-First, run the development server:
+## Tecnologias principais
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Next.js 15 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS (v4)
+- PostCSS (@tailwindcss/postcss)
+- PrimeReact + PrimeIcons (componentes UI)
+- react-hook-form + @hookform/resolvers (forms)
+- Zod (validação de esquema)
+- Biome (lint/format)
+
+Arquivos de configuração importantes:
+
+- `next.config.ts` — configuração do Next.js
+- `tsconfig.json` — configuração do TypeScript
+- `tailwind.config.js` — configuração do Tailwind
+- `postcss.config.mjs` — configuração do PostCSS
+
+## Pré-requisitos
+
+- Node.js (recomendado: 18 ou 20)
+- npm (ou outro gerenciador de pacotes como pnpm/yarn)
+- Git (para clonar o repositório)
+
+Observação: as versões exatas das dependências estão em `package.json`.
+
+## Instalação (clone + dependências)
+
+No Windows PowerShell:
+
+```powershell
+git clone <REPO_URL>
+cd admin-panel
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Substitua `<REPO_URL>` pela URL do repositório remoto se aplicável.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Comandos úteis
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Os scripts disponíveis em `package.json` são:
 
-## Learn More
+- `npm run dev` — Inicia o servidor de desenvolvimento (Next.js com Turbopack)
+- `npm run build` — Gera o build de produção (usa Turbopack)
+- `npm run start` — Inicia o servidor a partir do build gerado
+- `npm run lint` — Executa o Biome (checa problemas)
+- `npm run format` — Formata o código com Biome
 
-To learn more about Next.js, take a look at the following resources:
+Exemplos (PowerShell):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```powershell
+npm run dev
+npm run build
+npm run start
+npm run lint
+npm run format
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Notas sobre desenvolvimento
 
-## Deploy on Vercel
+- Os scripts `dev` e `build` incluem a flag `--turbopack` atualmente definida no `package.json`. Turbopack é o bundler experimental/performático do ecossistema Next.js; se encontrar problemas, remova a flag momentaneamente ou atualize conforme a documentação do Next.js.
+- O projeto usa o App Router (pasta `app/`). Componentes e páginas estão em `app/` e `components/`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Estrutura básica do projeto
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/` — rotas e páginas (App Router)
+- `components/` — componentes reutilizáveis (ex.: `components/layout/sidebar.tsx`)
+- `public/` — ativos públicos
+- `tailwind.config.js`, `postcss.config.mjs` — estilo e compilação CSS
+
+## Lint, formatação e tips
+
+- Lint/format: o projeto usa Biome (`@biomejs/biome`) configurado via `package.json`.
+- Para aplicar formatação automática:
+
+```powershell
+npm run format
+```
+
+Para checar apenas (sem aplicar):
+
+```powershell
+npm run lint
+```
+
+## Build e deploy
+
+1. Gerar build:
+
+```powershell
+npm run build
+```
+
+2. Iniciar servidor a partir do build:
+
+```powershell
+npm run start
+```
+
+Para deploy, publique o conteúdo conforme a sua plataforma (Vercel, Netlify, Docker, etc.). O Next.js tem configurações específicas para cada plataforma; consulte a documentação oficial.
+
+## Problemas comuns
+
+- Erros de versão do Node: atualize para Node 18/20.
+- Dependências ausentes: rode `npm install` novamente e verifique mensagens de erro no terminal.
+- Problemas com Turbopack: remova `--turbopack` dos scripts temporariamente para usar o bundler padrão do Next.js.
+
+## Contato / Contribuição
+
+Sinta-se à vontade para abrir issues ou pull requests com melhorias. Para mudanças rápidas de estilo, use `npm run format` antes de commitar.
+
+---
+
+Arquivo gerado automaticamente — descreve as tecnologias detectadas no repositório e instruções básicas para rodar localmente.
