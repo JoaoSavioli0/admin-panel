@@ -15,8 +15,10 @@
 }
 
 @theme {
+  --color-default: #f9f9f9;
   --color-primary: #202529;
   --color-secondary: #394952;
+  --color-warning: #ffe83d;
 }
 
 @media (prefers-color-scheme: dark) {

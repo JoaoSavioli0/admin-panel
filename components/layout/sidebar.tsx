@@ -4,9 +4,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function Sidebar() {
-  const [selected, setSelected] = useState("dashboard");
+  const [selected, setSelected] = useState("panel");
   const router = useRouter();
   const pathName = usePathname();
+
+  const logOff = () => {
+    document.cookie = `communityon_admin-token=1; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
+    router.push("/login");
+  };
 
   if (pathName === "/login") {
     return null;
@@ -29,7 +34,10 @@ export function Sidebar() {
                   ? "bg-secondary !text-white"
                   : "hover:bg-secondary/50"
               }
-              onClick={() => setSelected("panel")}
+              onClick={() => {
+                setSelected("panel");
+                router.push("/painel");
+              }}
             >
               <i className="pi pi-desktop"></i>
               <a href="#">Painel geral</a>
@@ -40,7 +48,10 @@ export function Sidebar() {
                   ? "bg-secondary !text-white"
                   : "hover:bg-secondary/50"
               }
-              onClick={() => setSelected("dashboard")}
+              onClick={() => {
+                setSelected("dashboard");
+                router.push("/dashboard");
+              }}
             >
               <i className="pi pi-chart-pie"></i>
               <a href="#">Dashboards</a>
@@ -168,6 +179,18 @@ export function Sidebar() {
             >
               <i className="pi pi-question"></i>
               <a href="#">Ajuda</a>
+            </li>
+
+            <li
+              className={
+                selected === "help"
+                  ? "bg-secondary !text-white"
+                  : "hover:bg-secondary/50"
+              }
+              onClick={() => logOff()}
+            >
+              <i className="pi pi-sign-out -rotate-180"></i>
+              <a href="#">Sair</a>
             </li>
           </ul>
         </nav>

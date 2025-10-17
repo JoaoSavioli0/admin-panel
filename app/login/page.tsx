@@ -32,13 +32,13 @@ export default function LoginPage() {
 
   const onSubmit = (data: formData) => {
     //adiciona cookie e redireciona
-    document.cookie = `communityon_admin-token=1; path=/`;
-    router.push("/dashboard");
+    document.cookie = `communityon_admin-token=1; path=/; Secure; SameSite=Strict`;
+    router.push("/panel");
     console.log(data);
   };
 
   return (
-    <div className="w-full h-screen flex p-3 gap-x-3 bg-gray-100">
+    <div className="w-full h-screen flex p-3 gap-x-3 bg-gray-100 ">
       <div className="w-1/2 h-full rounded-2xl bg-primary px-6 flex items-center justify-center">
         <p className="text-[200px] font-bold break-words w-full text-zinc-200 leading-[1]">
           COMMUNITY
