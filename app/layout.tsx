@@ -11,6 +11,7 @@ import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-indigo/theme.css"; // ou outro tema
 import "primereact/resources/primereact.min.css";
 import SectionLayout from "@/components/layout/sectionLayout";
+import { MockDataProvider } from "@/context/MockDataContext";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -36,7 +37,9 @@ export default function RootLayout({
           <Sidebar />
         </div>
         <PrimeReactProvider>
-          <SectionLayout>{children}</SectionLayout>
+          <MockDataProvider>
+            <SectionLayout>{children}</SectionLayout>
+          </MockDataProvider>
         </PrimeReactProvider>
       </body>
     </html>

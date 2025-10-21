@@ -1,4 +1,4 @@
-import RedirectButton from "@/components/panelComponents/redirectButton";
+import PanelButton from "@/components/panelComponents/panelButton";
 import SectionBox from "@/components/panelComponents/sectionBox";
 
 export default function MainPage() {
@@ -12,7 +12,7 @@ export default function MainPage() {
         >
           <div className="w-full h-full">
             <div className="w-full grid grid-cols-2 gap-1">
-              <RedirectButton
+              <PanelButton
                 className="col-span-2"
                 type="wide"
                 status="warning"
@@ -21,7 +21,7 @@ export default function MainPage() {
                 redirectTo="/residents"
               />
 
-              <RedirectButton
+              <PanelButton
                 type="square"
                 status="normal"
                 value={2}
@@ -29,7 +29,7 @@ export default function MainPage() {
                 redirectTo="/residents"
               />
 
-              <RedirectButton
+              <PanelButton
                 type="square"
                 status="normal"
                 value={2}
@@ -49,21 +49,21 @@ export default function MainPage() {
         >
           <div className="w-full h-full">
             <div className="w-full grid grid-cols-2 gap-1">
-              <RedirectButton
+              <PanelButton
                 status="warning"
                 value={1}
                 description={"Esperando aprovação"}
                 redirectTo="/residents"
               />
 
-              <RedirectButton
+              <PanelButton
                 status="normal"
                 value={2}
                 description={"Agendado esse mês"}
                 redirectTo="/residents"
               />
 
-              <RedirectButton
+              <PanelButton
                 className="col-span-2"
                 type="wide"
                 status="normal"
@@ -83,7 +83,7 @@ export default function MainPage() {
         >
           <div className="w-full h-full">
             <div className="w-full grid grid-cols-4 gap-1">
-              <RedirectButton
+              <PanelButton
                 status="normal"
                 indicator="grow"
                 value={609}
@@ -91,7 +91,7 @@ export default function MainPage() {
                 redirectTo="/residents"
               />
 
-              <RedirectButton
+              <PanelButton
                 status="normal"
                 indicator="grow"
                 value={18}
@@ -99,14 +99,14 @@ export default function MainPage() {
                 redirectTo="/residents"
               />
 
-              <RedirectButton
+              <PanelButton
                 status="normal"
                 value={2}
                 description={"Moradores saídos"}
                 redirectTo="/residents"
               />
 
-              <RedirectButton
+              <PanelButton
                 status="dark"
                 value={0.22}
                 description={"N° saídas por entrada"}

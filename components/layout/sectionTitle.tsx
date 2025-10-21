@@ -2,6 +2,7 @@
 
 import { GetPathForBreadCrumb } from "@/utils/pathUtils";
 import BreadCrumb, { BreadCrumbItem } from "./breadCrumb";
+import { usePathname } from "next/navigation";
 
 interface SectionTitleProps {
   title: string;
@@ -10,7 +11,9 @@ interface SectionTitleProps {
 
 export default function SectionTitle({ title, subTitle }: SectionTitleProps) {
   const breadCrumbItems: BreadCrumbItem[] = GetPathForBreadCrumb();
+  const path = usePathname();
 
+  if (path === "/login") return null;
   return (
     <div className="w-full pb-10">
       <div className="w-full pb-4">

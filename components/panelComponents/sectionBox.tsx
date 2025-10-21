@@ -1,5 +1,5 @@
 import React from "react";
-import RedirectButton from "./redirectButton";
+import RedirectButton from "./panelButton";
 
 interface SectionBoxProps {
   children: React.ReactNode;
@@ -30,8 +30,8 @@ export default function SectionBox({
       <div className="w-full text-left">
         <h1 className="text-lg font-semibold">{title}</h1>
         {redirectDescription && (
-          <div className="flex gap-x-1 items-center text-xs text-zinc-600">
-            <p className=" font-medium">{redirectDescription}</p>
+          <div className="flex gap-x-1 items-center text-xs text-zinc-600 rounded-full px-1 py-0.5 w-fit hover:bg-zinc-200/40 transition-colors duration-100 cursor-pointer">
+            <p className="font-medium ">{redirectDescription}</p>
             <i className="pi pi-angle-right" style={{ fontSize: "0.7rem" }}></i>
           </div>
         )}

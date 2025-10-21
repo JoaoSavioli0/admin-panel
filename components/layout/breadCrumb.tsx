@@ -14,7 +14,13 @@ interface BreadCrumbProps {
 export default function BreadCrumb({ items, className }: BreadCrumbProps) {
   const pagesCategories: Record<string, string[]> = {
     Navegação: ["painel", "dashboard", "perfil"],
-    Controle: ["solicitacoes", "agendamentos", "avisos", "moradores"],
+    Controle: [
+      "solicitacoes",
+      "agendamentos",
+      "avisos",
+      "moradores",
+      "espacos",
+    ],
     Utilidades: ["relatorios", "insights"],
   };
 

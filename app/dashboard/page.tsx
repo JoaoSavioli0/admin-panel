@@ -1,4 +1,4 @@
-import RedirectButton from "@/components/panelComponents/redirectButton";
+import RedirectButton from "@/components/panelComponents/panelButton";
 
 export default function DashboardPage() {
   return (

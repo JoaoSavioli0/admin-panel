@@ -9,33 +9,37 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 
 import * as z from "zod";
+import { useState } from "react";
 
-const loginSchema = z.object({
-  username: z
-    .string()
-    .min(3, "O nome de usuário deve ter no mínimo 3 caracteres"),
-  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres"),
-});
-
-type formData = z.infer<typeof loginSchema>;
+type formData = {
+  username: string;
+  password: string;
+};
 
 export default function LoginPage() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<formData>({
-    resolver: zodResolver(loginSchema),
-  });
+  const { register, handleSubmit } = useForm<formData>();
 
   const router = useRouter();
 
-  const onSubmit = (data: formData) => {
+  const onSubmit = async (data: formData) => {
+    setErroLogin(false);
+    setIsLoading(true);
     //adiciona cookie e redireciona
-    document.cookie = `communityon_admin-token=1; path=/; Secure; SameSite=Strict`;
-    router.push("/panel");
-    console.log(data);
+    await new Promise((r) => setTimeout(r, 2000)); //simulando requisição de login
+
+    if (data.password == "123" && data.username == "admin@communityon.com.br") {
+      document.cookie = `communityon_admin-token=1; path=/; Secure; SameSite=Strict`;
+      router.push("/painel");
+    } else {
+      setErroLogin(true);
+      setIsLoading(false);
+    }
   };
+
+  const [visiblePassword, setVisiblePassword] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [erroLogin, setErroLogin] = useState(false);
 
   return (
     <div className="w-full h-screen flex p-3 gap-x-3 bg-gray-100 ">
@@ -62,6 +66,7 @@ export default function LoginPage() {
               <InputText
                 id="username"
                 className="w-full"
+                invalid={erroLogin}
                 {...register("username")}
               />
               <label htmlFor="username">Usuário</label>
@@ -69,21 +74,36 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <FloatLabel>
+            <FloatLabel className="relative">
               <InputText
                 id="password"
                 className="w-full"
+                invalid={erroLogin}
+                type={visiblePassword ? "text" : "password"}
                 {...register("password")}
               />
               <label htmlFor="password">Senha</label>
+              <i
+                onClick={() => setVisiblePassword(!visiblePassword)}
+                className={`rounded-full hover:bg-zinc-50 hover:text-gray-500 p-1 transition-colors duration-100 pi absolute end-[12px] -translate-y-1/2 top-1/2 text-gray-600 cursor-pointer ${
+                  visiblePassword ? "pi-eye" : "pi-eye-slash"
+                }`}
+                style={{ fontSize: "1.3rem" }}
+              ></i>
             </FloatLabel>
+            {erroLogin && (
+              <p className="mt-2 text-xs text-red-600">
+                Usuário ou senha inválidos.
+              </p>
+            )}
           </div>
 
           <Button
             type="submit"
-            label="Entrar"
+            label={!isLoading ? "Entrar" : ""}
+            loading={isLoading}
             severity="secondary"
-            className="w-full !bg-primary text-zinc-200"
+            className="!w-full !bg-primary text-zinc-200"
           ></Button>
         </form>
       </div>

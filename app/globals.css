@@ -19,6 +19,11 @@
   --color-primary: #202529;
   --color-secondary: #394952;
   --color-warning: #ffe83d;
+  --color-warning-secondary: var(--color-yellow-800);
+  --color-success: var(--color-green-200);
+  --color-success-secondary: var(--color-green-800);
+  --color-info: var(--color-blue-200);
+  --color-info-secondary: var(--color-blue-800);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -77,4 +82,47 @@ body {
 
 *::-webkit-scrollbar-thumb:active {
   background-color: #394952;
+}
+
+.p-multiselect-label {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
+}
+
+.p-multiselect-token-label {
+  font-size: small;
+}
+
+.p-multiselect-item {
+  font-size: small;
+}
+
+.p-multiselect-panel {
+  width: 260px;
+}
+
+.p-multiselect-filter {
+  height: 40px;
+}
+
+.p-multiselect-trigger svg {
+  width: 12px !important;
+  height: 12px !important;
+}
+
+.p-multiselect-token svg {
+  width: 13px !important;
+  height: 13px !important;
+}
+
+.p-multiselect-trigger {
+  width: 2rem !important;
+}
+
+.p-column-header-content svg {
+  width: 11px !important;
+  height: 11px !important;
 }

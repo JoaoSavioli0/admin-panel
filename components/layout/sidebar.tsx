@@ -4,7 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
 export function Sidebar() {
-  const [selected, setSelected] = useState("panel");
+  const [selected, setSelected] = useState("");
   const router = useRouter();
   const pathName = usePathname();
 
@@ -40,7 +40,7 @@ export function Sidebar() {
               }}
             >
               <i className="pi pi-desktop"></i>
-              <a href="#">Painel geral</a>
+              <span>Painel geral</span>
             </li>
             <li
               className={
@@ -54,7 +54,7 @@ export function Sidebar() {
               }}
             >
               <i className="pi pi-chart-pie"></i>
-              <a href="#">Dashboards</a>
+              <span>Dashboards</span>
             </li>
             <li
               className={
@@ -65,7 +65,7 @@ export function Sidebar() {
               onClick={() => setSelected("profile")}
             >
               <i className="pi pi-user"></i>
-              <a href="#">Perfil</a>
+              <span>Perfil</span>
             </li>
           </ul>
 
@@ -80,43 +80,69 @@ export function Sidebar() {
                   ? "bg-secondary !text-white"
                   : "hover:bg-secondary/50"
               }
-              onClick={() => setSelected("solicitations")}
+              onClick={() => {
+                setSelected("solicitations");
+                router.push("/solicitacoes");
+              }}
             >
               <i className="pi pi-flag"></i>
-              <a href="#">Solicitações</a>
+              <span>Solicitações</span>
             </li>
             <li
               className={
-                selected === "appointments"
+                selected === "bookings"
                   ? "bg-secondary !text-white"
                   : "hover:bg-secondary/50"
               }
-              onClick={() => setSelected("appointments")}
+              onClick={() => {
+                setSelected("bookings");
+                router.push("/agendamentos");
+              }}
             >
               <i className="pi pi-calendar"></i>
-              <a href="#">Agendamentos</a>
+              <span>Agendamentos</span>
             </li>
             <li
               className={
-                selected === "notices"
+                selected === "espacos"
                   ? "bg-secondary !text-white"
                   : "hover:bg-secondary/50"
               }
-              onClick={() => setSelected("notices")}
+              onClick={() => {
+                setSelected("espacos");
+                router.push("/espacos");
+              }}
+            >
+              <i className="pi pi-map-marker"></i>
+              <span>Espaços</span>
+            </li>
+            <li
+              className={
+                selected === "avisos"
+                  ? "bg-secondary !text-white"
+                  : "hover:bg-secondary/50"
+              }
+              onClick={() => {
+                setSelected("avisos");
+                router.push("/avisos");
+              }}
             >
               <i className="pi pi-bell"></i>
-              <a href="#">Avisos</a>
+              <span>Avisos</span>
             </li>
             <li
               className={
-                selected === "residents"
+                selected === "moradores"
                   ? "bg-secondary !text-white"
                   : "hover:bg-secondary/50"
               }
-              onClick={() => setSelected("residents")}
+              onClick={() => {
+                setSelected("moradores");
+                router.push("/moradores");
+              }}
             >
               <i className="pi pi-users"></i>
-              <a href="#">Moradores</a>
+              <span>Moradores</span>
             </li>
           </ul>
 
@@ -134,7 +160,7 @@ export function Sidebar() {
               onClick={() => setSelected("reports")}
             >
               <i className="pi pi-file"></i>
-              <a href="#">Relatórios</a>
+              <span>Relatórios</span>
             </li>
 
             <li
@@ -146,7 +172,7 @@ export function Sidebar() {
               onClick={() => setSelected("insights")}
             >
               <i className="pi pi-lightbulb"></i>
-              <a href="#">Insights com IA</a>
+              <span>Insights com IA</span>
             </li>
           </ul>
 
@@ -166,7 +192,7 @@ export function Sidebar() {
               }}
             >
               <i className="pi pi-cog"></i>
-              <a href="#">Configurações</a>
+              <span>Configurações</span>
             </li>
 
             <li
@@ -178,7 +204,7 @@ export function Sidebar() {
               onClick={() => setSelected("help")}
             >
               <i className="pi pi-question"></i>
-              <a href="#">Ajuda</a>
+              <span>Ajuda</span>
             </li>
 
             <li
@@ -190,7 +216,7 @@ export function Sidebar() {
               onClick={() => logOff()}
             >
               <i className="pi pi-sign-out -rotate-180"></i>
-              <a href="#">Sair</a>
+              <span>Sair</span>
             </li>
           </ul>
         </nav>
