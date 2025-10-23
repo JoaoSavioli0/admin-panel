@@ -126,3 +126,21 @@ body {
   width: 11px !important;
   height: 11px !important;
 }
+
+.p-dropdown-item-label {
+  font-size: 14px !important;
+}
+
+.rainbow-border {
+  border: 2px solid transparent;
+  border-radius: 100%;
+  border-image: linear-gradient(
+    to bottom right,
+    #b827fc 0%,
+    #2c90fc 25%,
+    #b8fd33 50%,
+    #fec837 75%,
+    #fd1892 100%
+  );
+  border-image-slice: 1;
+}

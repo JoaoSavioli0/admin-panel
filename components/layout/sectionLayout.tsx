@@ -37,6 +37,15 @@ export default function SectionLayout({ children }: SectionLayout) {
       title: "Avisos",
       subTitle: "Publique avisos importantes para os moradores",
     },
+    colaboradores: {
+      title: "Colaboradores",
+      subTitle:
+        "Viualize e cadastre os fornecedores de serviços do seu condomínio",
+    },
+    insights: {
+      title: "Insights",
+      subTitle: "Análises inteligentes geradas automaticamente pelo sistema",
+    },
   };
 
   const path = usePathname();

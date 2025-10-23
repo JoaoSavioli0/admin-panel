@@ -80,32 +80,13 @@ export default function SolicitacoesPage() {
           )}
         />
         <Column
-          field="assignedColab"
-          header="Responsável"
-          style={{ width: "200px" }}
+          style={{ width: "70px" }}
           body={(rowData) => (
-            <MultiSelect
-              className="!h-[40px] !w-full"
-              value={rowData.assignedColabs || []} // array de ids
-              onChange={(e) => setCollaborator(rowData.id, e.value as number[])}
-              options={mockCollaborators}
-              optionLabel="name"
-              optionValue="id" // <-- importantíssimo
-              display="chip"
-              filter
-            />
-          )}
-        />
-        <Column
-          field="creatorData.name"
-          header=""
-          body={(rowData) => (
-            <span className="text-blue-500 flex items-center gap-x-1 cursor-pointer">
-              <i
-                className="pi pi-angle-down"
-                style={{ fontSize: "0.7rem" }}
-              ></i>
-            </span>
+            <div className="flex items-center">
+              <button className="rounded-sm bg-blue-500 hover:bg-blue-600 text-white px-1.5 py-1 cursor-pointer">
+                Visualizar
+              </button>
+            </div>
           )}
         />
       </DataTable>

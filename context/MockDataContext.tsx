@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { Toast } from "primereact/toast";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 export const MockDataContext = createContext({});
 
@@ -13,6 +14,20 @@ export class UserData {
   avatar?: string;
 }
 
+export type toastProps = {
+  type:
+    | "success"
+    | "info"
+    | "warn"
+    | "error"
+    | "secondary"
+    | "contrast"
+    | undefined;
+  title: string;
+  text: string;
+  duration?: number;
+};
+
 export interface ExtendedUserData extends UserData {
   email: string;
   role: "morador" | "síndico" | "administrador";
@@ -22,7 +37,7 @@ export interface ExtendedUserData extends UserData {
 export class Collaborator {
   id!: number;
   name!: string;
-  place!: string;
+  createdAt!: string;
   age!: number;
   phone!: string;
   avatar?: string;
@@ -60,7 +75,43 @@ export class Booking {
   status: "Pendente" | "Aprovado" | "Concluído" = "Pendente";
 }
 
+export class Notification {
+  id!: number;
+  title!: string;
+  description!: string;
+  releaseDate!: Date;
+  target?: { blocks: string; floors: string; apartments: string };
+  status: "Pendente" | "Enviada" = "Pendente";
+}
+
+export interface InsightMetric {
+  label: string; // Ex: "Increase"
+  value: string | number; // Pode variar
+  type?: string; // Tipo semântico: "percentage", "days", "category", etc
+}
+
+export class Insight {
+  id!: number;
+  title!: string;
+  category?: string;
+  description!: string;
+  createdAt!: Date;
+  metrics?: InsightMetric[] = [];
+}
+
 export function MockDataProvider({ children }: { children: React.ReactNode }) {
+  const toast = useRef<Toast | null>(null);
+
+  const showToast = ({ type, title, text, duration }: toastProps) => {
+    if (!toast.current) return;
+    toast.current?.show({
+      severity: type,
+      summary: title,
+      detail: text,
+      life: duration,
+    });
+  };
+
   const [mockSolicitations, setMockSolicitations] = useState<Solicitation[]>([
     {
       id: 1,
@@ -158,7 +209,7 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
     {
       id: 1,
       name: "Carlos Henrique",
-      place: "Bloco A - Térreo",
+      createdAt: "2025-06-14",
       age: 42,
       phone: "(11) 99845-2211",
       avatar: "https://randomuser.me/api/portraits/men/45.jpg",
@@ -168,7 +219,7 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
     {
       id: 2,
       name: "Marcos Paulo",
-      place: "Bloco B - Subsolo",
+      createdAt: "2024-08-04",
       age: 35,
       phone: "(11) 99230-5582",
       avatar: "https://randomuser.me/api/portraits/men/23.jpg",
@@ -178,7 +229,7 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
     {
       id: 3,
       name: "Juliana Ribeiro",
-      place: "Bloco C - Cobertura",
+      createdAt: "2023-01-29",
       age: 29,
       phone: "(11) 98765-7720",
       avatar: "https://randomuser.me/api/portraits/women/30.jpg",
@@ -188,7 +239,7 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
     {
       id: 4,
       name: "Anderson Lima",
-      place: "Jardins externos",
+      createdAt: "2024-03-15",
       age: 38,
       phone: "(11) 99123-3345",
       avatar: "https://randomuser.me/api/portraits/men/56.jpg",
@@ -427,6 +478,68 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
     },
   ]);
 
+  const [mockNotifications, setMockNotifications] = useState<Notification[]>([
+    {
+      id: 1,
+      title: "Manutenção na Piscina",
+      description:
+        "A piscina estará interditada entre os dias 23 e 25 de outubro para manutenção preventiva nas bombas e filtros.",
+      releaseDate: new Date("2025-10-22"),
+      target: { blocks: "A, B", floors: "Térreo-2", apartments: "" },
+      status: "Pendente",
+    },
+    {
+      id: 2,
+      title: "Limpeza de Caixa d’Água",
+      description:
+        "A limpeza das caixas d’água será realizada no dia 28 de outubro. A água poderá ficar turva durante o procedimento.",
+      releaseDate: new Date("2025-10-20"),
+      target: { blocks: "C", floors: "", apartments: "201-210" },
+      status: "Enviada",
+    },
+    {
+      id: 3,
+      title: "Reunião de Condomínio",
+      description:
+        "Convidamos todos os moradores para a reunião do condomínio que ocorrerá no salão de festas às 19h do dia 30 de outubro.",
+      releaseDate: new Date("2025-10-19"),
+      status: "Enviada",
+    },
+    {
+      id: 4,
+      title: "Troca de Lâmpadas",
+      description:
+        "A equipe de manutenção realizará a troca das lâmpadas queimadas nas áreas comuns na manhã de 25 de outubro.",
+      releaseDate: new Date("2025-10-21"),
+      target: { blocks: "B", floors: "1-3", apartments: "" },
+      status: "Pendente",
+    },
+    {
+      id: 5,
+      title: "Campanha de Reciclagem",
+      description:
+        "Durante o mês de novembro, haverá pontos de coleta de materiais recicláveis no térreo de cada bloco.",
+      releaseDate: new Date("2025-10-18"),
+      status: "Enviada",
+    },
+  ]);
+
+  const [mockInsights, setMockInsights] = useState([
+    {
+      id: 1,
+      title: "Aumento de solicitações de manutenção em dias chuvosos",
+      category: "Clima e Manutenção",
+      description:
+        "Análise dos últimos 30 dias mostra um aumento de 45% em solicitações de manutenção hidráulica durante períodos de chuva intensa.",
+      createdAt: new Date("2025-10-20"),
+      metrics: [
+        { label: "Aumento", value: 45, type: "percentage" },
+        { label: "Período", value: "30 dias", type: "time" },
+        { label: "Categoria", value: "Hidráulica", type: "category" },
+      ],
+    },
+  ]);
+
   const setCollaborator = (
     solicitationId: number,
     collaboratorIds: number[]
@@ -452,8 +565,13 @@ export function MockDataProvider({ children }: { children: React.ReactNode }) {
         setMockBookablePlaces,
         mockResidents,
         setMockResidents,
+        showToast,
+        mockNotifications,
+        setMockNotifications,
+        mockInsights,
       }}
     >
+      <Toast ref={toast} position="top-right" />
       {children}
     </MockDataContext.Provider>
   );

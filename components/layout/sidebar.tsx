@@ -76,20 +76,6 @@ export function Sidebar() {
           <ul className="flex flex-col gap-y-1 *:text-zinc-300 *:cursor-pointer *:hover:text-zinc-200 *:w-full *:h-[45px] *:flex *:items-center *:gap-x-3 *:px-3 *:rounded *:transition-colors *:duration-100">
             <li
               className={
-                selected === "solicitations"
-                  ? "bg-secondary !text-white"
-                  : "hover:bg-secondary/50"
-              }
-              onClick={() => {
-                setSelected("solicitations");
-                router.push("/solicitacoes");
-              }}
-            >
-              <i className="pi pi-flag"></i>
-              <span>Solicitações</span>
-            </li>
-            <li
-              className={
                 selected === "bookings"
                   ? "bg-secondary !text-white"
                   : "hover:bg-secondary/50"
@@ -102,20 +88,7 @@ export function Sidebar() {
               <i className="pi pi-calendar"></i>
               <span>Agendamentos</span>
             </li>
-            <li
-              className={
-                selected === "espacos"
-                  ? "bg-secondary !text-white"
-                  : "hover:bg-secondary/50"
-              }
-              onClick={() => {
-                setSelected("espacos");
-                router.push("/espacos");
-              }}
-            >
-              <i className="pi pi-map-marker"></i>
-              <span>Espaços</span>
-            </li>
+
             <li
               className={
                 selected === "avisos"
@@ -130,6 +103,37 @@ export function Sidebar() {
               <i className="pi pi-bell"></i>
               <span>Avisos</span>
             </li>
+
+            <li
+              className={
+                selected === "colaboradores"
+                  ? "bg-secondary !text-white"
+                  : "hover:bg-secondary/50"
+              }
+              onClick={() => {
+                setSelected("colaboradores");
+                router.push("/colaboradores");
+              }}
+            >
+              <i className="pi pi-face-smile"></i>
+              <span>Colaboradores</span>
+            </li>
+
+            <li
+              className={
+                selected === "espacos"
+                  ? "bg-secondary !text-white"
+                  : "hover:bg-secondary/50"
+              }
+              onClick={() => {
+                setSelected("espacos");
+                router.push("/espacos");
+              }}
+            >
+              <i className="pi pi-map-marker"></i>
+              <span>Espaços</span>
+            </li>
+
             <li
               className={
                 selected === "moradores"
@@ -143,6 +147,21 @@ export function Sidebar() {
             >
               <i className="pi pi-users"></i>
               <span>Moradores</span>
+            </li>
+
+            <li
+              className={
+                selected === "solicitations"
+                  ? "bg-secondary !text-white"
+                  : "hover:bg-secondary/50"
+              }
+              onClick={() => {
+                setSelected("solicitations");
+                router.push("/solicitacoes");
+              }}
+            >
+              <i className="pi pi-flag"></i>
+              <span>Solicitações</span>
             </li>
           </ul>
 
@@ -169,7 +188,10 @@ export function Sidebar() {
                   ? "bg-secondary !text-white"
                   : "hover:bg-secondary/50"
               }
-              onClick={() => setSelected("insights")}
+              onClick={() => {
+                setSelected("insights");
+                router.push("/insights");
+              }}
             >
               <i className="pi pi-lightbulb"></i>
               <span>Insights com IA</span>

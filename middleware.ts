@@ -13,7 +13,7 @@ export function middleware(req: NextRequest) {
   }
 
   if (token && isPublicPath) {
-    return Response.redirect(new URL("/panel", req.url));
+    return Response.redirect(new URL("/painel", req.url));
   }
 
   return NextResponse.next();
