@@ -106,8 +106,8 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
-      <div className="w-full grid grid-cols-4 grid-rows-2 gap-3">
+    <div className="w-full h-screen flex flex-col items-center justify-center">
+      {/* <div className="w-full grid grid-cols-4 grid-rows-2 gap-3">
         <div className="p-4 border rounded-md border-black/20 shadow-sm bg-white row-span-2">
           <div className="w-full h-full">
             <Pie
@@ -127,7 +127,14 @@ export default function DashboardPage() {
         <div className="p-4 border rounded-md border-black/20 shadow-sm bg-white col-span-2 row-span-2">
           <Line data={dashSolicitationVolume} />
         </div>
-      </div>
+      </div> */}
+      <iframe
+        title="DASHBORAD"
+        width="100%"
+        height="100%"
+        src="https://app.powerbi.com/view?r=eyJrIjoiM2NiODA5MTUtZDI1NC00MDUwLWEzMmQtZmI0NTRmY2ZjZDA5IiwidCI6IjU5ZDRmMjQ5LTA1MjAtNDZjZi1iNmIyLTg3M2Q1ZGE1NDNmZSJ9"
+        allowFullScreen={true}
+      ></iframe>
     </div>
   );
 }

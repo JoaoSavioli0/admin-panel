@@ -24,9 +24,12 @@ export default function BreadCrumb({ items, className }: BreadCrumbProps) {
     Utilidades: ["relatorios", "insights"],
   };
 
-  const category = Object.entries(pagesCategories).find(([_, values]) =>
-    values.includes(items[0].label.toLowerCase())
-  )?.[0];
+  const category =
+    items.length > 0
+      ? Object.entries(pagesCategories).find(([_, values]) =>
+          values.includes(items[0].label.toLowerCase())
+        )?.[0]
+      : "";
 
   const fullItems = category ? [{ label: category }, ...items] : items;
 

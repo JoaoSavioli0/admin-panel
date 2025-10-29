@@ -1,15 +1,17 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import React from "react";
 
 interface redirectButton {
   className?: string;
-  type?: "wide" | "square";
+  type?: "wide" | "square" | "parent";
   value?: number;
-  description: string;
+  description?: string;
   redirectTo?: string;
   indicator?: "grow" | "decrease";
   status: "warning" | "warning-border" | "normal" | "dark";
+  children?: React.ReactNode;
 }
 
 export default function RedirectButton({
@@ -20,6 +22,7 @@ export default function RedirectButton({
   redirectTo,
   indicator,
   status,
+  children,
 }: redirectButton) {
   const router = useRouter();
 
@@ -27,7 +30,7 @@ export default function RedirectButton({
     if (redirectTo) router.push(redirectTo);
   };
 
-  const brokenDescription = description.split(" ");
+  const brokenDescription = description ? description.split(" ") : "";
 
   return (
     <button
@@ -51,54 +54,62 @@ export default function RedirectButton({
             : ""
         }`}
     >
-      <div className={`${type == "wide" ? "flex" : ""}`}>
-        {value && (
-          <h1
-            className={`font-semibold text-left ${
-              type == "wide" ? "text-6xl" : "text-4xl"
+      {type !== "parent" ? (
+        <div className={`${type == "wide" ? "flex" : ""}`}>
+          {value && (
+            <h1
+              className={`font-semibold text-left ${
+                type == "wide" ? "text-6xl" : "text-4xl"
+              }`}
+            >
+              {value}
+              {indicator && (
+                <span>
+                  <i
+                    className={`pi ${
+                      indicator == "grow"
+                        ? "pi-angle-double-up"
+                        : "pi-angle-double-down"
+                    }`}
+                  ></i>
+                </span>
+              )}
+            </h1>
+          )}
+          <div
+            className={`relative w-full ${
+              type == "square" ? "mt-0.5" : "ml-1"
             }`}
           >
-            {value}
-            {indicator && (
-              <span>
-                <i
-                  className={`pi ${
-                    indicator == "grow"
-                      ? "pi-angle-double-up"
-                      : "pi-angle-double-down"
-                  }`}
-                ></i>
-              </span>
+            {type == "square" && brokenDescription && (
+              <h2 className="w-full text-sm text-wrap line-clamp-2 leading-[1] text-left font-medium break-all whitespace-pre-line">
+                {brokenDescription
+                  .slice(0, brokenDescription.length / 2)
+                  .join(" ")}
+                <br></br>
+                {brokenDescription.length > 1 &&
+                  brokenDescription
+                    .slice(brokenDescription.length / 2)
+                    .join(" ")}
+              </h2>
             )}
-          </h1>
-        )}
-        <div
-          className={`relative w-full ${type == "square" ? "mt-0.5" : "ml-1"}`}
-        >
-          {type == "square" && (
-            <h2 className="w-full text-sm text-wrap line-clamp-2 leading-[1] text-left font-medium break-all whitespace-pre-line">
-              {brokenDescription
-                .slice(0, brokenDescription.length / 2)
-                .join(" ")}
-              <br></br>
-              {brokenDescription.length > 1 &&
-                brokenDescription.slice(brokenDescription.length / 2).join(" ")}
-            </h2>
-          )}
-          {type == "wide" && (
-            <p className="max-w-[80%] text-left font-medium text-lg">
-              {description}
-            </p>
-          )}
+            {type == "wide" && (
+              <p className="max-w-[80%] text-left font-medium text-lg">
+                {description}
+              </p>
+            )}
 
-          {redirectTo && (
-            <i
-              className="pi pi-angle-right absolute end-[5px] top-1/2 -translate-y-1/2"
-              style={{ fontSize: "1.3rem" }}
-            ></i>
-          )}
+            {redirectTo && (
+              <i
+                className="pi pi-angle-right absolute end-[5px] top-1/2 -translate-y-1/2"
+                style={{ fontSize: "1.3rem" }}
+              ></i>
+            )}
+          </div>
         </div>
-      </div>
+      ) : (
+        children
+      )}
     </button>
   );
 }

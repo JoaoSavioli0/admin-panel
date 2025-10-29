@@ -15,7 +15,7 @@ export default function SectionLayout({ children }: SectionLayout) {
     },
     dashboard: {
       title: "Dashboard",
-      subTitle: "Analise seus dados com gráficos visuais",
+      subTitle: "Visualize dados valiosos através de gráficos",
     },
     solicitacoes: {
       title: "Solicitações",
@@ -45,6 +45,10 @@ export default function SectionLayout({ children }: SectionLayout) {
     insights: {
       title: "Insights",
       subTitle: "Análises inteligentes geradas automaticamente pelo sistema",
+    },
+    home: {
+      title: "Página Inicial",
+      subTitle: "Bem-vindo de volta!",
     },
   };
 

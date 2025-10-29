@@ -32,7 +32,10 @@ export default function SectionBox({
         {redirectDescription && (
           <div className="flex gap-x-1 items-center text-xs text-zinc-600 rounded-full px-1 py-0.5 w-fit hover:bg-zinc-200/40 transition-colors duration-100 cursor-pointer">
             <p className="font-medium ">{redirectDescription}</p>
-            <i className="pi pi-angle-right" style={{ fontSize: "0.7rem" }}></i>
+            <i
+              className="pi pi-angle-right mt-[1px]"
+              style={{ fontSize: "0.7rem" }}
+            ></i>
           </div>
         )}
       </div>

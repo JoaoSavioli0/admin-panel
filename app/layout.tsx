@@ -33,11 +33,11 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased relative min-h-screen`}
       >
-        <div className="w-[260px] h-full fixed">
-          <Sidebar />
-        </div>
         <PrimeReactProvider>
           <MockDataProvider>
+            <div className="w-[260px] h-full fixed">
+              <Sidebar />
+            </div>
             <SectionLayout>{children}</SectionLayout>
           </MockDataProvider>
         </PrimeReactProvider>

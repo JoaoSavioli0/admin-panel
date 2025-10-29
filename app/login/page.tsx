@@ -11,17 +11,17 @@ import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { useState } from "react";
 
-type formData = {
+type FormData = {
   username: string;
   password: string;
 };
 
 export default function LoginPage() {
-  const { register, handleSubmit } = useForm<formData>();
+  const { register, handleSubmit } = useForm<FormData>();
 
   const router = useRouter();
 
-  const onSubmit = async (data: formData) => {
+  const onSubmit = async (data: FormData) => {
     setErroLogin(false);
     setIsLoading(true);
     //adiciona cookie e redireciona
