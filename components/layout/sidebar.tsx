@@ -18,10 +18,10 @@ export function Sidebar() {
     return null;
   }
 
-  useEffect(() => {
-    setSelected(pathName.replace("/", ""));
-    console.log(pathName);
-  }, [pathName]);
+  // useEffect(() => {
+  //   setSelected(pathName.replace("/", ""));
+  //   console.log(pathName);
+  // }, [pathName]);
 
   return (
     <div className="h-full w-full px-3 pt-4 border-r border-gray-600 bg-primary overflow-y-auto relative scrollbar-hidden">
